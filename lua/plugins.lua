@@ -1,6 +1,8 @@
 vim.cmd [[packadd packer.nvim]]
-
+--vim.lsp.set_log_level("debug")
 return require('packer').startup(function(use)
+  --  use 'OmniSharp/omnisharp-vim'
+  use {'nvim-treesitter/nvim-treesitter',run=":TSUpdate"}
   -- Автоустановка пакетного менеджера
   use 'wbthomason/packer.nvim'
   ---------------------------------------------------------
@@ -14,13 +16,21 @@ return require('packer').startup(function(use)
       require('lualine').setup()
   end, }
   -- Тема в стиле Rose Pine
-  use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    config = function()
-      vim.cmd('colorscheme rose-pine')
+  -- use({
+  --  'gruvbox',
+  --  as = 'rose-pine',
+   -- config = function()
+   --   vim.cmd('colorscheme rose-pine')
+   -- end
+  --})
+  use ({'morhetz/gruvbox', as="gruvbox", 
+    config=function()
+      vim.cmd('colorscheme gruvbox')
     end
   })
+  vim.cmd("colorscheme gruvbox")
+      
+  --vim.cmd('au BufNewFile,BufRead *.xaml set filetype=xml.csharp')
   ---------------------------------------------------------
   -- МОДУЛИ РЕДАКТОРА
   ---------------------------------------------------------
@@ -33,7 +43,6 @@ return require('packer').startup(function(use)
   -- Структура классов и функций в файле
   use 'majutsushi/tagbar'
   -- use 'ap/vim-css-color'
-  use 'skammer/vim-css-color'
   -- Файловый менеджер
   use { 'kyazdani42/nvim-tree.lua',
       requires = 'kyazdani42/nvim-web-devicons',
@@ -46,7 +55,7 @@ return require('packer').startup(function(use)
   -- ПОИСК
   ---------------------------------------------------------
   -- Наш FuzzySearch
-  use { 'nvim-telescope/telescope.nvim',
+    use { 'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} },
       config = function() 
       require'telescope'.setup {}
@@ -56,6 +65,7 @@ return require('packer').startup(function(use)
   -- КОД
   ---------------------------------------------------------
   -- автоматические закрывающиеся скобки
+  -- vim.configurations 
   use { 'windwp/nvim-autopairs',
       config = function()
       require("nvim-autopairs").setup()
@@ -67,14 +77,19 @@ return require('packer').startup(function(use)
   end }
   
   use 'mattn/emmet-vim'
-
+ 
+  
   ---------------------------------------------------------
   -- LSP И АВТОДОПОЛНЯЛКИ
   ---------------------------------------------------------
   -- Collection of configurations for built-in LSP client
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
-
+  -- use 'neovim/nvim-lspconfig'
+--  use 'williamboman/nvim-lsp-installer'
+use {
+    "williamboman/mason.nvim",
+    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+}
+use "williamboman/mason-lspconfig.nvim"
   -- Автодополнялка
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -87,7 +102,6 @@ return require('packer').startup(function(use)
   -- Snippets plugin
   use 'L3MON4D3/LuaSnip'
   -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use 'nvim-treesitter/nvim-treesitter'
 
   -- Линтер, работает для всех языков
   use 'dense-analysis/ale'
@@ -96,4 +110,10 @@ return require('packer').startup(function(use)
   ---------------------------------------------------------
   -- Даже если включена русская раскладка, то nvim-команды будут работать
   use 'powerman/vim-plugin-ruscmd'
+  use 'xiyaowong/transparent.nvim'
+  --use 'hrsh7th/nvim-cmp'
+--  use 'hrsh7th/cmp-nvim-lsp'
+-- use 'L3MON4D3/LuaSnip'
+ -- use 'saadparwaiz1/cmp_luasnip'
+  use "rafamadriz/friendly-snippets"
 end)
