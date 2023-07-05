@@ -83,7 +83,7 @@ return require('packer').startup(function(use)
   -- LSP И АВТОДОПОЛНЯЛКИ
   ---------------------------------------------------------
   -- Collection of configurations for built-in LSP client
-  -- use 'neovim/nvim-lspconfig'
+  use 'neovim/nvim-lspconfig'
 --  use 'williamboman/nvim-lsp-installer'
 use {
     "williamboman/mason.nvim",
