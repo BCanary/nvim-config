@@ -47,7 +47,11 @@ return require('packer').startup(function(use)
   use { 'kyazdani42/nvim-tree.lua',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function() 
-      require'nvim-tree'.setup {}
+      require'nvim-tree'.setup {
+        git = {
+          enable = false
+        }
+      }
   end, }
   --- popup окошки
   use 'nvim-lua/popup.nvim'
@@ -66,10 +70,10 @@ return require('packer').startup(function(use)
   ---------------------------------------------------------
   -- автоматические закрывающиеся скобки
   -- vim.configurations 
-  use { 'windwp/nvim-autopairs',
-      config = function()
-      require("nvim-autopairs").setup()
-  end}
+--  use { 'windwp/nvim-autopairs',
+ --     config = function()
+  --    require("nvim-autopairs").setup()
+  --nd}
   -- Комментирует по <gc> все, вне зависимости от языка программирования
   use { 'numToStr/Comment.nvim',
       config = function() 
@@ -94,6 +98,7 @@ use "williamboman/mason-lspconfig.nvim"
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-nvim-lsp-signature-help'
   use 'saadparwaiz1/cmp_luasnip'
 
   --- Автодополнлялка к файловой системе
@@ -116,4 +121,8 @@ use "williamboman/mason-lspconfig.nvim"
 -- use 'L3MON4D3/LuaSnip'
  -- use 'saadparwaiz1/cmp_luasnip'
   use "rafamadriz/friendly-snippets"
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'nvim-telescope/telescope-dap.nvim'
 end)

@@ -22,7 +22,7 @@ opt.expandtab = true         --???
 opt.tabstop = 4              --1 tab = 4 пробела
 opt.smartindent = true
 opt.shiftwidth = 4           --Смещаем на 4 пробела
-
+vim.g.mapleader = "\\"
 -- 2 spaces for selected filetypes
 vim.cmd [[
 autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=2 tabstop=2

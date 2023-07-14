@@ -47,6 +47,7 @@ cmp.setup({
     },
     sources = {
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'luasnip' },
         { name = 'path' },
         { name = 'buffer', option = {
@@ -59,6 +60,7 @@ cmp.setup({
     mapping = {
 ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
 ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}), 
+['<C-o>'] = cmp.mapping(cmp.mapping.scroll_docs(-1)),
 --      ['<C-n>'] = cmp.mapping.select_next_item(),
 --      ['<C-p>'] = cmp.mapping.select_prev_item(),    
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4)),
@@ -186,6 +188,20 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 require("lspconfig").omnisharp.setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+require("lspconfig").html.setup {
+  capabilities = capabilities,
+  on_attach = on_attach
+}
+require("lspconfig").clangd.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { "clangd", "--background-index", "-j=3", "--limit-results=20", "--header-insertion=never",
+  "--limit-references=100","--pch-storage=memory", "--suggest-missing-includes"}
+}
+require("lspconfig").cmake.setup {
   capabilities = capabilities,
   on_attach = on_attach
 }
